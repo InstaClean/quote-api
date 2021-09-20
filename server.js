@@ -19,5 +19,15 @@ app.get('/api/quotes/random', (req, res, next) => {
   })
 
 app.get('/api/quotes', (req, res, next) => {
-    res.send({quotes: quotes})
+    
+    const person = req.query.person
+
+    if (person) {
+        const quoteList = quotes.filter( quote => quote.person === person)
+        res.send({quotes: quoteList})
+    } else {
+        res.send({quotes: quotes})
+    }
 })
+
+
